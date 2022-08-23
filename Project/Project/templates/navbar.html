@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+</head>
+<style>
+
+  *{
+        /* background: ; */
+        margin: 0;
+        padding: 0;
+    }
+  
+</style>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar">
+            <div class="container">
+              <a class="navbar-brand logo" href="{% url 'home-page' %}"><img class="logo-img" src="{% static 'Images/logo.svg' %}" alt="">StudyBuddy</a>
+              
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+    
+              <form class="search-form" action="{% url 'home-page' %}">
+                <input class="form-control me-2 " name="q" type="search" placeholder="Search for room" aria-label="Search">
+                <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </form>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% if request.user.is_authenticated %}
+                <div class="profile-image">
+                  <img src="{{request.user.avatar.url}}" alt="">
+                </div>
+                <p>{{request.user.username}} <br> @{{request.user.username}}</p>
+                <i class="fa-solid fa-angle-down" id="icon"></i>
+                <!-- <a href="{% url 'logout-page' %}">Logout</a> -->
+                <div class="icon-drop block " id="drop-icon">
+                  <div class="icon-content">
+                      <div class="same profile">
+                          <div class="image">
+                              <img src="{{request.user.avatar.url}}" alt="">
+                          </div>
+                          <div class="name">
+                              <h2>{{request.user.username}}</h2>
+                              <!-- <p>See your Profile</p> -->
+                          </div>
+                      </div>
+                      <hr>
+                      <a href="">
+                        <div class="same Edit">
+                            <div class="icon">
+                                <i class="fa-solid fa-wrench"></i>
+                            </div>
+                            <p>Update Profile</p>
+                        </div>
+                      </a>
+                      
+                      <a href="{% url 'change-password' %}">
+                        <div class="same change-pass">
+                            <div class="icon">
+                                <i class="fa-solid fa-gear"></i>
+                            </div>
+                            <p>Change Password</p>
+                        </div>
+                      </a>
+                      
+                      <a href="{% url 'logout-page' %}">
+                        <div class="same logout">
+                            <div class="icon">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </div>
+                            <p>Logout</p>
+                        </div>
+                      </a>
+                  </div>
+              </div>
+                {% else %}
+                  <div class="login-icons d-flex align-items-center">
+                      <a href="{% url 'login-page' %}"> <i class="fa-solid fa-user"></i>Login</a>
+                  </div>
+                  <div class="register-icons d-flex align-items-center">
+                      <a href="{% url 'register-page' %}"><i class="fa-solid fa-lock"></i>Register</a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+        </nav>
+      </header>
+</body>
+</html>
+
+
+<script>
+
+  var drop = false
+  icon = document.getElementById('icon')
+  drop_icon = document.querySelector('#drop-icon')
+
+
+  icon.addEventListener('click', function(){
+    drop_icon.classList.toggle('block')
+    drop = true
+  })
+
+  // window.addEventListener('click', function(){
+  //   if(drop){
+  //     drop_icon.classList.add('block')
+  //   }
+  // })
+  
+
+
+
+  window.onload = function(){
+      drop_icon.classList.add('block')
+  }
+
+</script>

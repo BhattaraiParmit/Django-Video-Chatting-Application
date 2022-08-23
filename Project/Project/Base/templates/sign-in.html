@@ -1,0 +1,35 @@
+
+{% extends 'Main.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/sign-in.css' %}">
+
+<div class="container login-section">
+    <div class="row mt-5">
+        <div class="col-md-6 text-center">
+            <img src="../../static/Images/Login.jpg" alt="">
+            <a href="{% url 'register-page' %}">Create an account</a>
+        </div>  
+        <div class="col-md-6 mt-5">
+            <h1>Sign in</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="username-section">
+                    <i class="fa-solid fa-user"></i>
+                    <input name="username" type="text" placeholder="Username">
+                </div>
+
+                <div class="password-section">
+                    <i class="fa-solid fa-lock"></i>
+                    <input name="password" type="password" placeholder="Password">
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

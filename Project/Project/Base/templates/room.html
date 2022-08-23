@@ -1,0 +1,581 @@
+{% extends 'Main.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/room.css' %}">
+
+    <div class="container video-section  m-auto">
+        <div class="row" style="margin-top: 7rem;">
+            <div class="col-md-8">
+              <div class="videos-container">
+                <div class="videos">
+                  <video id="Video"></video>
+                  <!-- <video id="recorded" playsinline loop></video> -->
+                </div>
+
+                <!-- <div class="record-timer">
+                  <i class="fa-solid fa-record-vinyl"></i>
+                  <span><p>1</p>:<p>0</p></span>
+                </div> -->
+                <div class="video-icons">
+                    <div class="extend-video main-body">
+                      <i class="fa-solid fa-expand"></i>
+                    </div>
+
+                    <div class="mute-audio main-body">
+                        <i id="micro" class="fa-solid fa-microphone"></i>
+                        <!-- <i class="fa-solid fa-microphone-slash"></i> -->
+                    </div>
+
+                    <div class="stop-stream" id="end-stream" >
+                      <i class="fa-solid fa-phone"></i>
+                    </div>
+
+                    {% if created == 'created' %}
+                    <div class="mute-video main-body">
+                      <i class="fa-solid fa-video"></i>
+                    </div>
+                    {% endif %}
+
+                    {% if created == 'created' %}
+                    <div class="record-video main-body" id="record">
+                      <i id="record-video" class="fa-solid fa-record-vinyl"></i>
+                    </div>    
+                    {% endif %}
+
+
+                </div>
+              </div>
+
+                <!-- <video id="user-video"></video> -->
+                <h1>{{room.name}}</h1>
+                {{room.id}}
+                <!-- {{message_room}} -->
+                <div class="num-time">
+                    <p class="num">{{room.participant.count}}</p>
+                    <p class="time">Started stream on {{room.created_data}}</p>
+                </div>
+                <!-- <div> -->
+                  <!-- <button id="record" style="background: red;">Record</button> -->
+                  <!-- <button id="play" style="background: red;" disable>play</button> -->
+                  <!-- <button id="download"  style="color: black; background: rgb(76, 75, 75); cursor: pointer;">Download</button> -->
+                <!-- </div> -->
+            </div>
+
+                      
+          
+                      
+            <div class="col-md-3  chat-section ms-5 ">
+                <div class="chat-header w-100 text-center">
+                    <h2>Top Chat</h2>
+                    <i class="fa-solid fa-angle-down"></i>
+
+                </div>
+                <div class="chat-body">
+                    <div class="chat-content">
+                        {% for message in messages %}
+                        <div class="chat-profile">
+                            <div class="chat-image">
+                                <img id="user-image" src="{{message.user.avatar.url}}" alt="">
+                            </div>
+                            <p id="user-name">{{message.user.username}}</p>
+
+                            <span><p id="user-message">{{message.body}}</p></span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+                <div class="chat-message">
+                    <form action="" id="form">
+                        <input type="text" name="message"  placeholder="Type Here">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+
+
+        let iceServers = {
+                iceServers: [
+                { urls: "stun:stun.services.mozilla.com" },
+                { urls: "stun:stun.l.google.com:19302" },
+                ],
+            };
+
+        const Video = document.getElementById('Video')
+        const remote_video = document.getElementById('user-video')
+          
+
+          // =======================================================
+        let stream;
+        let rtcpeerconnection;
+        const created = "{{created}}";
+        const room = "{{room_code}}";
+        let isCreated; 
+
+        var form = document.getElementById('form')
+
+
+
+        const recordedVideo = document.querySelector('#recorded');
+        const recordButton = document.querySelector('#record');
+        const playButton = document.querySelector('#play');
+        const downloadButton = document.querySelector('#download');
+
+        const endStream = document.getElementById('end-stream')
+
+        let AudioButton = document.querySelector('.mute-audio');
+        let videoButton = document.querySelector('.mute-video')
+
+        // Audio.addEventListener('click', function(){
+        //   console.log("Audio")
+        // })
+
+       
+          
+
+        let mediaRecorder;
+        let recordedBlobs
+        let recording = false
+            
+        userImage = document.getElementById('user-name');
+        // console.log(userImage)
+        // userImage.innerText = "hello"
+      
+      
+        if(created == 'join'){
+          // endStream.disabled = true 
+          // recordButton.remove()
+          document.querySelector('.mute-audio').remove()
+          document.querySelector('.extend-video').remove()
+          document.querySelector('.stop-stream').style.marginLeft = "7rem"
+
+        }
+
+        form.addEventListener('submit', function(e){
+          e.preventDefault()
+          sendMessage()
+        })
+
+
+        function sendMessage(){
+          message = form.message.value
+
+          if (message){
+
+            $.ajax({
+              type: "POST",
+              url: '/updateMesssage/',
+              data: JSON.stringify({'message': message, 'room_code': room}),
+              ContentType: 'application/json; charset=utf-8',
+              traditional: true,
+              success: function(data){
+                console.log("data is", data)
+              }
+
+            })
+
+            form.message.value = ''
+
+          } else{
+            return
+          }
+        }
+        
+
+
+      function sendingVideoToBackend(recordedBlobs){
+
+        room_id = '{{room.id}}'
+        console.log(room_id)
+        var blob = new Blob(recordedBlobs,  {type: 'video/mp4'})
+        console.log("blob is", blob)
+        var data = new FormData();  
+        data.append('video', blob)
+        data.append('room_id', room_id)  
+        data.append("csrfmiddlewaretoken", "{{ csrf_token }}")
+        console.log("data is",data)
+        videos = {'data': data}
+        $.ajax({
+          type: "POST",
+          mimeType: 'multipart/form-data',
+          url: "/uploadVideo/",
+          data: data,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function(data){
+            console.log("data is", data)
+          },
+          
+        }) 
+      }
+
+      //  
+
+
+      endStream.addEventListener('click', () =>{
+        // console.log("stream ended") 
+        if(recording){
+          stopRecording()
+          recording = false
+          // console.log('des', recordedBlobs)
+          // sendingVideoToBackend(recordedBlobs)
+        }else{
+          
+          if(recordedBlobs){
+            console.log(recordedBlobs)
+          }else{
+            console.log("yess")
+          }
+        }
+
+      })
+
+
+
+
+      if(created == 'created'){
+      recordButton.addEventListener('click', () => {
+          try{
+            if(recording){
+              stopRecording();
+              console.log('record stopped')
+              document.getElementById('record-video').style.color = 'white'
+              recording = false
+              // sendingVideoToBackend(recordedBlobs)
+
+            }else{
+              console.log('recording start')
+              startRecording()
+              document.getElementById('record-video').style.color = 'red'
+              recording = true
+            }
+          }
+        // } else {
+          catch{
+
+          stopRecording();
+          recordButton.textContent = 'Record';
+          playButton.disabled = false;
+          downloadButton.disabled = false;
+          }
+        
+      });
+
+      }
+
+      // playButton.addEventListener('click', () => {
+      //   const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
+      //   recordedVideo.src = null;
+      //   recordedVideo.srcObject = null;
+      //   recordedVideo.src = window.URL.createObjectURL(superBuffer);
+      //   recordedVideo.controls = true;
+      //   recordedVideo.play();
+      // });
+
+
+
+      // downloadButton.addEventListener('click', () => {
+      //   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+      //   console.log("down", blob)
+      //   const url = window.URL.createObjectURL(blob);
+      //   const a = document.createElement('a');
+      //   a.style.display = 'none';
+
+      //   a.href = url;
+      //   a.download = 'test.mp4';
+      //   document.body.appendChild(a);
+      //   a.click();
+      //   setTimeout(() => {
+      //     document.body.removeChild(a);
+      //     window.URL.revokeObjectURL(url);
+      //   }, 100);
+      // });
+
+
+      function handleDataAvailable(event) {
+        console.log("data available")
+        console.log('handleDataAvailable', event);
+        if (event.data && event.data.size > 0) {
+          recordedBlobs.push(event.data);
+        }
+
+        sendingVideoToBackend(recordedBlobs)
+      }
+  
+
+
+      function startRecording() {
+        // console.log("media")
+        recordedBlobs = [];
+        let options = {mimeType: 'video/webm;codecs=vp9,opus'};
+        try {
+          mediaRecorder = new MediaRecorder(window.stream, options);
+          console.log("media")
+        } catch (e) {
+          console.error('Exception while creating MediaRecorder:', e);
+          // errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
+          return;
+        }
+      
+        console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
+        // recordButton.textContent = 'Stop Recording';
+        // playButton.disabled = true;
+        // downloadButton.disabled = true;
+        mediaRecorder.onstop = (event) => {
+          console.log('Recorder stopped: ', event);
+          console.log('Recorded Blobs: ', recordedBlobs);
+        };
+
+        mediaRecorder.ondataavailable = handleDataAvailable;
+        mediaRecorder.start();
+        console.log('MediaRecorder started', mediaRecorder);
+      }
+
+
+      function stopRecording() {
+        mediaRecorder.stop();
+      }
+
+
+    const ws = new WebSocket(`ws://127.0.0.1:8000/ws/${room}/${created}/`)
+
+
+
+        ws.onopen = () => {
+          console.log("opened");
+          ws.send(JSON.stringify({
+              command: "join_room",
+            })
+          );
+          
+          if (created == "created") {
+            isCreated = true;
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true,
+              })
+              .then((s) => {
+                stream = s;
+                window.stream = s
+                Video.srcObject = s;
+                Video.onloadeddata = () => {
+                  Video.play();
+                };
+
+                var audioTrack = s.getAudioTracks();
+                var videoTrack = s.getVideoTracks();
+
+                audioTrack[0].enabled = true;
+                videoTrack[0].enabled = true;
+
+
+                AudioButton.addEventListener('click', function(){
+                  audioTrack[0].enabled = !audioTrack[0].enabled;
+
+                  if(audioTrack[0].enabled){
+                    AudioButton.innerHTML = ''
+                    icons = `<i id="micro" class="fa-solid fa-microphone"></i>`
+                    AudioButton.innerHTML = icons
+                  } else{
+                    console.log('mute')
+                    AudioButton.innerHTML = ''
+                    icons = `<i class="fa-solid fa-microphone-slash"></i>`
+                    AudioButton.innerHTML = icons
+                  }
+
+                }) 
+
+                videoButton.addEventListener('click', function(){
+                  videoTrack[0].enabled = !videoTrack[0].enabled;
+
+                  if(videoTrack[0].enabled){
+                    videoButton.innerHTML = ''
+                    icons =  `<i class="fa-solid fa-video"></i>`
+
+                    videoButton.innerHTML = icons
+                  } else{
+                    videoButton.innerHTML = ''
+                    icons = `<i class="fa-solid fa-video-slash"></i>`
+                    videoButton.innerHTML = icons
+                    
+                  }
+                }) 
+
+               
+
+                // recordButton.disable = false
+              });
+            console.log("created")
+            console.log(isCreated);
+          } else {
+            isCreated = false;
+            navigator.mediaDevices  
+              .getUserMedia({
+                video: true,
+                audio: false,
+              })
+              .then((s) => {
+                stream = s;
+                Video.srcObject = s;
+                Video.onloadeddata = () => {
+                  Video.play();
+                };
+                ws.send(
+                  JSON.stringify({
+                    command: "join",
+                  //   room: room,
+                  })
+                );
+              });
+            console.log(isCreated);
+          }
+        };
+
+        ws.onmessage = (e) => {
+          const data = JSON.parse(e.data);
+          
+          if (data["command"] == "join") {
+            if (isCreated) {
+              // console.log("joined")
+              // call_btn.style.display = "block";
+              createoffer()
+            }
+          } else if (data["command"] == "offer") {
+            if (isCreated == false) {
+              console.log(data['offer'])
+              createanswer(data["offer"]);
+            }
+          } else if (data["command"] == "answer") {
+            if (isCreated) {
+              rtcpeerconnection.setRemoteDescription(data["answer"]);
+              console.log("answer set as remote");
+            }
+          } else if (data["command"] == "candidate") {
+            console.log(data['candidate'])
+            if (data["iscreated"] != isCreated) {
+              const IceCandidate = new RTCIceCandidate(data["candidate"]);
+              rtcpeerconnection.addIceCandidate(IceCandidate);
+            }
+          } else if(data['command'] == 'message'){
+            displayMessage(data)
+          }
+        };
+
+
+        function displayMessage(data){
+          console.log(data)
+          var chatContent = document.querySelector('.chat-content');
+          
+          var chat_profile = document.createElement('div')
+          var chat_image = document.createElement('div')
+
+          chat_profile.className = 'chat-profile'
+          chat_image.className = 'chat-image'
+
+          var image = document.createElement('img')
+          var name = document.createElement('p')
+          var Span = document.createElement('span')
+          var message = document.createElement('p')
+
+          console.log(Span)
+
+          image.src = data.message.image
+          chat_image.appendChild(image)
+
+
+          name.innerText = data.message.user
+
+          message.innerText = data.message.message
+          Span.appendChild(message)
+
+          chat_profile.appendChild(chat_image)
+          chat_profile.appendChild(name)
+          chat_profile.appendChild(Span)
+
+          chatContent.appendChild(chat_profile)
+      
+        }
+
+
+      
+        function createoffer() {
+          console.log("offer started");
+          rtcpeerconnection = new RTCPeerConnection(iceServers);
+          rtcpeerconnection.onicecandidate = OnIceCandidateFunc;
+          rtcpeerconnection.ontrack = OnTrackFunc;
+
+          stream.getTracks().forEach((track) => {
+            rtcpeerconnection.addTrack(track, stream);
+          });
+
+          rtcpeerconnection.createOffer().then((offer) => {
+            rtcpeerconnection.setLocalDescription(offer);
+            ws.send(
+              JSON.stringify({
+                command: "offer",
+                offer: offer,
+              //   room: room,
+              })
+            );
+          });
+        }
+
+
+        function createanswer(offer) {
+          console.log("answer started");
+          rtcpeerconnection = new RTCPeerConnection(iceServers);
+          rtcpeerconnection.onicecandidate = OnIceCandidateFunc;
+          rtcpeerconnection.ontrack = OnTrackFunc;
+          stream.getTracks().forEach((track) => {
+            rtcpeerconnection.addTrack(track, stream);
+          });
+          rtcpeerconnection.setRemoteDescription(offer);
+          rtcpeerconnection.createAnswer().then((answer) => {
+            rtcpeerconnection.setLocalDescription(answer);
+            ws.send(
+              JSON.stringify({
+                command: "answer",
+                answer: answer,
+              //   room: room,
+              })
+            );
+          });
+        }
+
+
+        function OnIceCandidateFunc(e) {
+          if (e.candidate) {
+            ws.send(
+              JSON.stringify({
+                command: "candidate",
+                candidate: e.candidate,
+                iscreated: isCreated,
+              //   room: room,
+              })
+            );
+          }
+        }
+
+
+        function OnTrackFunc(e) {
+          console.log("ontrack")
+          remote_video.srcObject = e.streams[0];
+          remote_video.onloadedmetadata = () => {
+            remote_video.play();
+          };
+        }
+
+</script>
+
+
+{% endblock %}

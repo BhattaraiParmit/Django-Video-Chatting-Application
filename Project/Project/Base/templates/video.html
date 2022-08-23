@@ -1,0 +1,46 @@
+{% extends 'Main.html' %}
+
+
+
+{% block content %}
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'styles/video.css' %}">
+
+<div class="container video-container ">
+    <div class="row">
+        <div class="col-12">
+            {% for v in video %}
+                <video class="embed-responsive embed-responsive-16by9" controls="controls">
+                    <source src="{{v.video.url}}" type="video/mp4">
+                </video>
+            {% endfor %}
+        
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    
+
+
+    videoSrc =  '{{video.video}}'
+    console.log(typeof(videoSrc))
+    console.log("videisrc", videoSrc)
+    video =document.getElementById('playvideo')
+    // const superBuffer = new Blob(videoSrc, {type: 'video/webm'});
+    
+
+    console.log("hello")
+</script>
+
+
+{%endblock%}
+
+
+{{video.video}}

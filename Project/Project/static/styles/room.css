@@ -1,0 +1,223 @@
+body{
+    /* background-color: red; */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* =============================== */
+
+.video-section{
+    height: 100vh;
+    /* overflow: auto; */
+}
+
+video{
+    width: 39rem;
+    height: auto;
+    /* height: 2rem; */
+    background: black;
+}
+
+#recorded{
+    width: 12rem;
+    height: auto;
+    background: black;
+}
+
+/* #user-video{
+    width: 45rem;
+    height: auto;
+    background: black;
+} */
+
+.video-container{
+    position: relative;
+}
+
+
+.video-icons{
+    display: flex;
+    position: absolute;
+    bottom: 66px;
+    align-items: center;
+    justify-content: center;
+    /* background: red; */
+    left: 18rem;
+    /* background: red; */
+}
+
+.video-icons a{
+    margin-right: 20px;
+}
+
+.main-body{
+    width: 44px;
+    height: 45px;
+    background: #5c5656;
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.main-body i{
+    color: white;
+    font-size: 15px;
+}
+
+.stop-stream{
+    width: 62px;
+    height: 62px;
+    background-color: #df3e3e;
+    border-radius: 43%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+
+.stop-stream i{
+    color: white;
+    font-size: 24px;
+    transform: rotate(130deg)
+}
+
+
+h1{
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.num-time{
+    display: flex;
+}
+
+.num-time .num{
+    font-size: 0.9rem;
+    margin-right: 20px;
+
+}
+
+
+.num-time .time{
+    color: black;
+    font-weight: 500;
+}
+
+
+.chat-section{
+    padding: 0;
+    background: #EEF0F5;
+    width: 19rem;
+    position: relative;
+    height: 81vh;
+}
+
+.chat-header{
+    background: #7E7E7E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 10px;
+   
+}
+
+
+.chat-header h2{
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.chat-header i{
+    font-size: 1.5rem;
+}
+
+.chat-body{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+}
+
+.chat-profile{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* background: red; */
+}
+
+.chat-image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.chat-profile img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    
+}
+
+.chat-profile p{
+    font-size: 14px;
+    font-weight: 900;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.chat-profile span p{
+    color: #535353;
+}
+
+
+.chat-message{
+    width: 100%;
+    position: absolute;
+    bottom:0;
+   
+}
+
+/* .chat-message form{
+    /* background: yellow; */
+/* } */
+
+
+
+.chat-message form input{
+    background-color: rgb(163, 158, 158);
+    width: 18rem;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+
+.chat-message form input::placeholder{
+    color: white;
+}
+
+
+/* #record-video{
+    color: red;
+} */
+

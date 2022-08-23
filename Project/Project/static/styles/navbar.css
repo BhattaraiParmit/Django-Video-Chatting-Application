@@ -1,0 +1,269 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* background-color: red; */
+}
+
+
+body{
+    /* background-color: red; */
+    font-family: 'Poppins', sans-serif;
+   
+    /* background: red; */
+}
+
+
+header{
+    /* background: red; */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 600000;
+    /* margin-bottom: 10rem; */
+
+}
+
+
+nav{
+    background-color: #EEF0F5;
+    /* background-color: red; */
+    position: fixed;
+    top: 0;
+    
+    
+
+}
+
+.logo{
+    text-align: center;
+    align-items: center;
+    color: #435464;
+    font-weight: bold;
+
+    
+}
+
+.logo img{
+    margin-right: 20px;
+}
+
+
+.logo-img{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+
+.collapse{
+    float: right;
+    margin-left: 12rem;
+    display: flex;
+    text-align: center;
+    position: relative;
+    /* background-color: red; */
+    /* display: flex; */
+}
+
+.search-form{
+    border-radius: 10px;
+    margin-left: 10rem;
+    position: relative;
+    align-items: center;
+    border: none;
+    outline: none;
+}
+
+.search-form i{
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+    color: #827C7C;
+}
+
+.search-form input{
+    border-radius: 30px;
+    width: 20rem;
+    padding: 10px;
+
+}
+
+.profile-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    /* background: red; */
+    object-position: center;
+}
+
+.profile-image img{
+    width:50px;
+    height: 50px; 
+    border-radius: 50%;
+}
+
+.collapse p{
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.collapse i{
+    margin-left: 10px;
+}
+
+
+.login-icons a{
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.login-icons a i{
+    font-size: 1.3rem;
+    color: #827C7C;
+    margin-right: 10px;
+}
+.login-icons{
+    margin-right: 10px;
+}
+
+.register-icons a{
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.register-icons a i{
+    font-size: 1.2rem;
+    color: #827C7C;
+    margin-right: 10px;
+}
+
+.register-icons{
+    margin-right: 10px;
+}
+
+/* ================================== */
+
+.icon-drop{
+    background: rgb(212, 204, 204);
+    width: 20rem;
+    /* height: 20rem; */
+    border-radius: 5px;
+    margin-left: 30rem;
+    position: absolute;
+    top: 5.5rem;
+    right: 0rem;
+    /* left: 1px; */
+    margin: 0;
+    padding: 0;
+
+
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    /* background: red; */
+    /* padding: 5px 10px; */
+}
+
+.name{
+    /* background-color: red; */
+    /* display: inline-block; */
+    margin-left: 20px;
+
+}
+
+.name h2{
+    font-size: 1.5rem;
+}
+
+.same{
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+.same:hover{
+    background: rgb(184, 183, 183);
+}
+
+.image{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.image img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+
+.body-part{
+    background-color: yellowgreen;
+    top: 10px
+}
+
+.icon-content{
+    padding: 10px;
+}
+/* ============= */
+.Edit{
+    display: flex;
+    align-items: center;
+    /* background: yellow; */
+}
+
+.icon{
+    width: 40px;
+    height: 40px;
+    background: rgb(82, 80, 80);
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-right: 35px;
+}
+
+
+.icon i{
+    color: white;
+    margin-right: 5px;
+}
+
+
+.Edit p{
+    color: black;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+.change-pass p{
+    color: black;
+    font-weight: bolder;
+    font-size: 1.2rem;
+
+}
+
+.logout p{
+    color: black;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+.block{
+    display: none;
+}

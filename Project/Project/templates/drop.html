@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello</h1>
+    <div class="icon-drop">
+        <div class="icon-content">
+            <div class="same profile">
+                <div class="image">
+                    <img src="../static/Images/Anish.jpg" alt="">
+                </div>
+                <div class="name">
+                    <h2>Anish Ghmire</h2>
+                    <p>See your Profile</p>
+                </div>
+            </div>
+            <hr>
+
+            <div class="same Edit">
+                <div class="icon">
+                    <i class="fa-solid fa-wrench"></i>
+                </div>
+                <p>Update Profile</p>
+            </div>
+
+            <div class="same change-pass">
+                <div class="icon">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <p>Chnage Password</p>
+            </div>
+
+            <div class="same logout">
+                <div class="icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+                <p>Logout</p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
+<style>
+
+    *{
+        /* background: ; */
+        margin: 0;
+    }
+
+    
+    .icon-drop{
+        background: rgb(212, 204, 204);
+        width: 20rem;
+        height: 20rem;
+        border-radius: 5px;
+        margin-left: 30rem;
+        position: absolute;
+
+    }
+
+    .profile{
+        display: flex;
+        align-items: center;
+        /* background: red; */
+        /* padding: 5px 10px; */
+    }
+
+    .name{
+        /* background-color: red; */
+        /* display: inline-block; */
+        margin-left: 20px;
+
+    }
+
+    .same{
+        padding: 5px 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+
+    }
+
+    .same:hover{
+        background: rgb(184, 183, 183);
+    }
+
+    .image{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+    .image img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+
+    .body-part{
+        background-color: yellowgreen;
+        top: 10px
+    }
+
+    .icon-content{
+        padding: 10px;
+    }
+    /* ============= */
+    .Edit{
+        display: flex;
+        align-items: center;
+        /* background: yellow; */
+    }
+
+    .icon{
+        width: 40px;
+        height: 40px;
+        background: rgb(82, 80, 80);
+        border-radius: 50%;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin-right: 35px;
+    }
+
+
+    .icon i{
+        color: white;
+    }
+
+
+    .Edit p{
+        color: black;
+        font-weight: bolder;
+        font-size: 1.2rem;
+    }
+
+    .change-pass p{
+        color: black;
+        font-weight: bolder;
+        font-size: 1.2rem;
+    
+    }
+
+    .logout p{
+        color: black;
+        font-weight: bolder;
+        font-size: 1.2rem;
+    }
+</style>

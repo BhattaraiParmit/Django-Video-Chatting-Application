@@ -1,0 +1,30 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* height: 100vh; */
+    /* overflow: hidden; */
+    /* background: red; */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.video-container{
+    margin-top: 9rem;
+}
+
+
+video{
+    width: 47rem;
+    height: 25rem;
+}
+
+
+
+
+
+
+

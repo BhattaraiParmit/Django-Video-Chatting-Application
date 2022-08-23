@@ -1,0 +1,124 @@
+
+{% extends 'Main.html' %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'styles/home-page.css' %}">
+
+  <div class="container-fluid mt-6 home-container">
+    <div class="row mt-4">
+      <div class="col-lg-3 first-section text-center">
+        <h1>BROWSE TOPICS</h1>
+    
+        <div class="topics mt-4">
+          <a href="{% url 'home-page' %}">
+            <div class="topics-body mb-2">
+              <p>All</p>
+              <div class="number-section">
+                {{topics.count}}
+              </div>
+            </div>
+          </a>
+         
+          {% for topic in topics %}
+          <a href="{% url 'home-page' %}?q={{topic.name}}">
+            <div class="topics-body">
+              <p>{{topic}}</p>
+              <div class="number-section">
+                {{topic.room_set.all.count}}
+              </div>
+            </div>
+          </a>
+          
+          {% endfor %}
+    
+        </div>
+    
+      </div>
+    
+      <div class="col-lg-5 ms-5 middle-section">
+        <div class="row">
+          <div class="col d-flex body-top justify-content-between">
+    
+            <div class="middle-header1">
+              <h5>STUDY ROOM</h5>
+              <p>{{rooms.count}} Room Available</p>
+            </div>
+    
+            
+            <a href="{% url 'create_room' %}" class="create-btn">
+              <i class="fa-solid fa-plus"></i>
+              Create Room
+            </a>
+            
+          </div>
+          {% for room in rooms %}
+          <a href="#">
+            <div class="middle-body mt-3 mb-1">
+              <div class="col">
+                <div class="name-profile">
+                  <img src="{{room.room_id.host.avatar.url}}" width="50px" height="50px" alt="">
+                  <a href="">{{room.room_id.host.username}}</a>
+                </div>
+      
+                <h3>{{room.room_id.name}}</h3>
+      
+                <p>{{room.room_id.description}}</p>
+                <hr>
+                <div class="middle-fotter">
+                  <p><i class="fa-solid fa-user-plus"></i><span>{{room.room_id.participant.count}}</span>Joined</p>
+                  <a href="{% url 'playVideo' room.room_id.id  %}">watch</a>
+                </div>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    
+      <div class="col-lg-3 ms-5 third-section text-center">
+        <div class="third-body w-90">
+          <div class="third-header mb-3">
+            <h3>Recent Live</h3>
+          </div>
+          {% for room in liveRoom %}
+          <div class="third-b">
+            <div class="third-b-content">
+              <div class="inside-body">
+                <img src="{{room.host.avatar.url}}" alt="">
+                <div class="third-content">
+                  <a href="" class="d-flex">@{{room.host.username}}</a>
+                  <small class="d-flex flex-items-start">{{room.created_data}}</small>
+                  <!-- <p class="d-flex flex-items-start">Replied to a post</p> -->
+                  <span class="d-flex flex-items-start">{{room.name}}</span> 
+                </div>
+              </div>
+              <div class="join-btn">
+                <a href="{% url 'join-room' room.room_code %}">Join</a>
+              </div>  
+              <!-- <div class="message">
+                <p>jaaba jhaajajd  haudha d ahcuahdhabc ah hauhcuhau ahuhca </p>
+              </div> -->
+            </div> 
+          </div>
+          {% endfor %}
+          
+        </div>
+      </div>
+    </div>
+    </div>
+
+<script>
+  console.log("hel")
+// console.log({{room}})
+
+</script>
+
+{% endblock %}
+    
+  
+
+
+
+

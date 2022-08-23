@@ -1,0 +1,283 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    /* background: red; */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+/* ============================================================================================ */
+.home-container{
+    /* background: red; */
+    margin-top: 7rem;
+}
+
+.first-section{
+    height: 83vh;
+    overflow: auto;
+}
+
+.middle-section{
+    /* background: red; */
+    height: 83vh;
+    overflow: auto;
+}
+
+.third-section{
+    height: 83vh;
+    overflow: auto;
+}
+
+.topics-section h1{
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.number-box{
+    background-color: red;
+
+}
+
+.topics{
+    padding: 10px;
+}
+
+.topics a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.topics-body{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 5px 0 2rem;
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    width: 100%;
+    padding: 0px 10px;
+    /* background: red; */  
+}
+
+.topics-body:hover{
+    background-color: rgb(190, 189, 189);
+}
+
+.topics-body p{
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+.number-section{
+    background: #E1E1E1;
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+
+
+/* ===================================================================================== */
+/* .middle-section{
+    max-height: 100vh;
+    overflow: auto;
+} */
+
+
+.body-top{
+    display: flex;
+    text-align: center; 
+    align-items: center; 
+    /* background: red; */
+}
+
+.body-top .middle-header1{
+
+    text-align: center;
+}
+
+.body-top .middle-header1 h5{
+    font-weight: 900;
+    }
+
+
+.body-top .create-btn{
+    background: #84B9BC;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.body-top .create-btn i{
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+
+
+.middle-body{
+    background: #F6F3F3;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.name-profile{
+    display: flex;
+    /* align-items: center; */
+    margin-bottom: 20px;
+}
+
+.name-profile a{
+    text-decoration: none;
+    color: black;
+    font-weight: 900;
+}
+
+
+.middle-body h3{
+    font-size: 1rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.name-profile img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.middle-fotter{
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    /* backgrond: red; */
+}
+
+
+.middle-fotter a{
+    background: rgb(78, 142, 146);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.middle-body .middle-fotter i{
+    margin-right: 5px;
+    color: #305F69;
+}
+.middle-body .middle-fotter span{
+    margin-right: 5px;
+}
+
+.third-body{
+    width: 90%;
+    border-radius: 5px 5px 0 0;
+    background: #F6F3F3;
+    /* height: 10rem; */
+    /* padding: 10px; */
+}
+
+.third-body .third-header{
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    height: 75px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: bolder;
+    background: #9CBCDA;
+
+}
+
+.third-body .third-b{
+    padding: 20px;
+}
+
+.third-body .third-b .third-b-content .inside-body{
+    display: flex;
+    padding: 10px;
+}
+
+.third-body .third-b .third-b-content{
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px;
+
+
+}
+
+.third-body .third-b .third-b-content .inside-body img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: start;
+    margin-right: 10px;
+}
+
+.third-body .third-b .third-b-content .third-content a{
+    margin: 0px;
+    /* margin-bottom: 30px; */
+
+}
+
+.third-body .third-b .third-b-content .third-content small{
+    font-size: 10px;
+    font-weight: 900; 
+    margin: 5px 0;
+} 
+
+.third-body .third-b .third-b-content .third-content p{
+    font-weight: 900;
+}
+
+.third-body .third-b .third-b-content .third-content span{
+    margin: 0;
+    padding: 0;
+    font-weight: 900;
+}
+.third-body .third-b .third-b-content .message{
+    background: #5B5959;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+}
+
+.join-btn{
+    margin-top: 20px;
+    width: 100%;
+    background: red;
+    border-radius: 10px;
+
+}
+
+.join-btn:hover{
+    background-color: rgb(240, 75, 70);
+}
+
+
+.join-btn a{
+    /* background: red; */
+    padding: 4px 6rem;
+    color: white;
+    /* color: red; */
+}

@@ -1,0 +1,63 @@
+body{
+    /* background-color: red; */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+/* =========================================================================== */
+/*-------------- Header */
+    
+/* ============================================================================================ */
+
+.whole-body {
+    background: #E9F0E2;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    background: #A8A4A4;
+    border-radius: 5px 5px 0 0;
+
+}
+
+.header i{
+    font-size: 1.5rem;
+    margin: 0 40px 0 15px;
+}
+
+.header h2{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-top: 10px;
+}
+
+.whole-body .body{
+    padding: 15px;
+}
+
+.buttons-group{
+    margin-left: 12.5rem;
+    display: flex;
+}
+
+textarea{
+    resize: none;
+}
+
+.buttons-group button{
+    margin-right: 10px;
+}
+
